@@ -29,7 +29,7 @@ export function AddVehicleForm() {
           ))}
         </select>
       </div>
-      <button type="submit" disabled={pending} className="rounded bg-black px-4 py-2 text-sm font-medium text-white disabled:opacity-50">
+      <button type="submit" disabled={pending} className="rounded bg-brand-navy px-4 py-2 text-sm font-medium text-white disabled:opacity-50">
         {pending ? 'Adding…' : 'Add vehicle'}
       </button>
       {state.error && <p className="w-full text-sm text-red-600">{state.error}</p>}

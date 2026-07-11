@@ -19,7 +19,7 @@ export function StatusTimeline({ events }: { events: TimelineEvent[] }) {
     <ol className="space-y-3">
       {events.map((e, i) => (
         <li key={i} className="flex gap-3 text-sm">
-          <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-black" />
+          <span className="mt-1 h-2 w-2 shrink-0 rounded-full bg-brand-navy" />
           <div>
             <p className="font-medium">{LABELS[e.event_type] ?? e.event_type}</p>
             <p className="text-gray-500">{new Date(e.created_at).toLocaleString()}</p>

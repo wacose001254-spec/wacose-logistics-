@@ -33,7 +33,7 @@ export function TrackLookupForm({ defaultCode }: { defaultCode?: string }) {
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded bg-black py-2.5 font-medium text-white disabled:opacity-50"
+        className="w-full rounded bg-brand-navy py-2.5 font-medium text-white disabled:opacity-50"
       >
         {pending ? 'Looking up…' : 'Track parcel'}
       </button>

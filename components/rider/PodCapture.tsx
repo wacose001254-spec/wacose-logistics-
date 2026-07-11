@@ -57,7 +57,7 @@ export function PodCapture({ bookingId, bookingCode }: { bookingId: string; book
       <button
         type="button"
         onClick={() => setOpen(true)}
-        className="w-full rounded bg-black py-3 font-medium text-white"
+        className="w-full rounded bg-brand-navy py-3 font-medium text-white"
       >
         Mark delivered
       </button>
@@ -104,7 +104,7 @@ export function PodCapture({ bookingId, bookingCode }: { bookingId: string; book
         type="button"
         onClick={handleSubmit}
         disabled={submitting}
-        className="w-full rounded bg-black py-2.5 font-medium text-white disabled:opacity-50"
+        className="w-full rounded bg-brand-navy py-2.5 font-medium text-white disabled:opacity-50"
       >
         {submitting ? 'Submitting…' : 'Confirm delivery'}
       </button>

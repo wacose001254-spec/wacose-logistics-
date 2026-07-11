@@ -22,7 +22,7 @@ export default async function InvoicePage({ params }: { params: Promise<{ bookin
       <h1 className="mb-2 text-xl font-semibold">Invoice — {booking.booking_code}</h1>
       <p className="mb-6 text-gray-600">Total: KES {booking.price}</p>
       {signedUrl ? (
-        <a href={signedUrl} className="rounded bg-black px-5 py-2.5 font-medium text-white" target="_blank" rel="noreferrer">
+        <a href={signedUrl} className="rounded bg-brand-navy px-5 py-2.5 font-medium text-white" target="_blank" rel="noreferrer">
           Download invoice PDF
         </a>
       ) : (

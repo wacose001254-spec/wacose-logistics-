@@ -59,7 +59,7 @@ export function DeliveryActions({
             type="button"
             onClick={() => setScanning(true)}
             disabled={busy}
-            className="w-full rounded bg-black py-3 font-medium text-white disabled:opacity-50"
+            className="w-full rounded bg-brand-navy py-3 font-medium text-white disabled:opacity-50"
           >
             {busy ? 'Confirming…' : 'Scan QR to confirm pickup'}
           </button>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 
@@ -16,6 +16,10 @@ export const metadata: Metadata = {
   title: "WACOSE Logistics",
   description: "Book pickups, track parcels, and manage deliveries.",
   manifest: "/manifest.json",
+};
+
+export const viewport: Viewport = {
+  themeColor: "#002050",
 };
 
 export default function RootLayout({

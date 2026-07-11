@@ -40,6 +40,9 @@ yarn-error.log*
 # local Claude Code session settings
 .claude
 
+# stray pasted-image artifacts (the real asset lives in public/logo-full.png)
+/Logo*.jpeg
+
 # typescript
 *.tsbuildinfo
 next-env.d.ts

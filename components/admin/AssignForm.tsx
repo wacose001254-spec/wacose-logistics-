@@ -50,7 +50,7 @@ export function AssignForm({
       <button
         type="submit"
         disabled={pending}
-        className="rounded bg-black px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
+        className="rounded bg-brand-navy px-4 py-2 text-sm font-medium text-white disabled:opacity-50"
       >
         {pending ? 'Assigning…' : 'Assign'}
       </button>

@@ -28,20 +28,20 @@ export default async function AdminBookingsPage({
     <div>
       <div className="mb-6 flex items-center justify-between">
         <h1 className="text-xl font-semibold">Bookings</h1>
-        <Link href="/admin/bookings/new" className="rounded bg-black px-4 py-2 text-sm font-medium text-white">
+        <Link href="/admin/bookings/new" className="rounded bg-brand-navy px-4 py-2 text-sm font-medium text-white">
           New booking
         </Link>
       </div>
 
       <div className="mb-4 flex flex-wrap gap-2 text-sm">
-        <Link href="/admin/bookings" className={`rounded px-3 py-1 ${!status ? 'bg-black text-white' : 'border'}`}>
+        <Link href="/admin/bookings" className={`rounded px-3 py-1 ${!status ? 'bg-brand-navy text-white' : 'border'}`}>
           All
         </Link>
         {statuses.map((s) => (
           <Link
             key={s}
             href={`/admin/bookings?status=${s}`}
-            className={`rounded px-3 py-1 ${status === s ? 'bg-black text-white' : 'border'}`}
+            className={`rounded px-3 py-1 ${status === s ? 'bg-brand-navy text-white' : 'border'}`}
           >
             {s}
           </Link>

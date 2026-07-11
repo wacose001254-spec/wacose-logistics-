@@ -81,7 +81,7 @@ export function BookingForm({ redirectTo }: { redirectTo?: 'admin' } = {}) {
       <button
         type="submit"
         disabled={pending}
-        className="w-full rounded bg-black py-2.5 text-base font-medium text-white disabled:opacity-50"
+        className="w-full rounded bg-brand-navy py-2.5 text-base font-medium text-white disabled:opacity-50"
       >
         {pending ? 'Booking…' : 'Book pickup'}
       </button>

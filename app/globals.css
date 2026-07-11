@@ -3,21 +3,25 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  /* Sampled directly from the WACOSE logo (shield navy / speed-line gold). */
+  --brand-navy: #002050;
+  --brand-navy-dark: #001838;
+  --brand-gold: #c89a44;
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
+  --color-brand-navy: var(--brand-navy);
+  --color-brand-navy-dark: var(--brand-navy-dark);
+  --color-brand-gold: var(--brand-gold);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
-}
+/* Intentionally no prefers-color-scheme dark override: the brand logo is a
+   navy-on-white mark, and a dark page background makes its white plate read
+   as a stray box rather than a clean logo placement. Light theme only. */
 
 body {
   background: var(--background);
