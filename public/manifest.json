@@ -1,0 +1,13 @@
+{
+  "name": "WACOSE Rider",
+  "short_name": "WACOSE",
+  "description": "WACOSE Logistics rider delivery app",
+  "start_url": "/rider/deliveries",
+  "scope": "/rider",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#111827",
+  "icons": [
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}
