@@ -1,17 +1,6 @@
 import 'server-only';
-import AfricasTalking from 'africastalking';
 
-let client: ReturnType<typeof AfricasTalking> | null = null;
-
-function getClient() {
-  if (!client) {
-    client = AfricasTalking({
-      apiKey: process.env.AFRICASTALKING_API_KEY!,
-      username: process.env.AFRICASTALKING_USERNAME!,
-    });
-  }
-  return client;
-}
+const TERMII_API_URL = 'https://api.ng.termii.com/api/sms/send';
 
 export interface SendSmsResult {
   ok: boolean;
@@ -19,20 +8,50 @@ export interface SendSmsResult {
   error?: string;
 }
 
+interface TermiiSuccessResponse {
+  message_id: string;
+  message: string;
+  balance: number;
+  user: string;
+}
+
+interface TermiiErrorResponse {
+  code?: string;
+  message?: string;
+}
+
+// Termii was chosen over Africa's Talking because it also offers WhatsApp
+// Business messaging under the same account/API — once Meta Business
+// verification is complete (a multi-day process independent of this code),
+// a sendWhatsApp() function can be added alongside this one following the
+// same shape, reusing TERMII_API_KEY.
 export async function sendSms(toPhone: string, message: string): Promise<SendSmsResult> {
+  if (!process.env.TERMII_API_KEY) {
+    return { ok: false, error: 'SMS not configured (TERMII_API_KEY missing)' };
+  }
+
   try {
-    const response = await getClient().SMS.send({
-      to: [toPhone],
-      message,
-      from: process.env.AFRICASTALKING_SENDER_ID || undefined,
+    const response = await fetch(TERMII_API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        to: toPhone,
+        from: process.env.TERMII_SENDER_ID || 'N-Alert',
+        sms: message,
+        type: 'plain',
+        channel: 'generic',
+        api_key: process.env.TERMII_API_KEY,
+      }),
     });
 
-    const recipient = response.SMSMessageData.Recipients[0];
-    if (!recipient || !recipient.status.toLowerCase().startsWith('success')) {
-      return { ok: false, error: recipient?.status ?? 'Unknown SMS provider error' };
+    const body: TermiiSuccessResponse | TermiiErrorResponse = await response.json();
+
+    if (!response.ok || !('message_id' in body)) {
+      const errorBody = body as TermiiErrorResponse;
+      return { ok: false, error: errorBody.message || `Termii request failed (${response.status})` };
     }
 
-    return { ok: true, providerMessageId: recipient.messageId };
+    return { ok: true, providerMessageId: body.message_id };
   } catch (err) {
     return { ok: false, error: err instanceof Error ? err.message : 'SMS send failed' };
   }
