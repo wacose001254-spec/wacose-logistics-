@@ -41,3 +41,43 @@ export const VEHICLE_STATUSES = ['active', 'maintenance', 'retired'] as const;
 export type VehicleStatus = (typeof VEHICLE_STATUSES)[number];
 
 export const RIDER_PING_INTERVAL_MS = 20_000;
+
+export const PERSONAL_ACCOUNT_TYPES = ['bank', 'mobile_money', 'savings', 'sacco'] as const;
+export type PersonalAccountType = (typeof PERSONAL_ACCOUNT_TYPES)[number];
+
+export const PERSONAL_TRANSACTION_TYPES = ['income', 'expense', 'transfer_in', 'transfer_out'] as const;
+export type PersonalTransactionType = (typeof PERSONAL_TRANSACTION_TYPES)[number];
+
+export const PERSONAL_CATEGORY_KINDS = ['income', 'expense'] as const;
+export type PersonalCategoryKind = (typeof PERSONAL_CATEGORY_KINDS)[number];
+
+// Seeded once per owner (lazily, on first budget-page visit) — see
+// lib/personal-finance/categories-actions.ts. "Salary" is the income side of
+// every salary/owner's-draw transfer; the rest are expense categories a
+// courier-business owner in Nairobi is likely to track month to month.
+export const DEFAULT_INCOME_CATEGORIES = ['Salary'] as const;
+
+export const DEFAULT_EXPENSE_CATEGORIES = [
+  'Housing',
+  'Food',
+  'Transport',
+  'Fuel',
+  'Motorcycle',
+  'Insurance',
+  'Medical',
+  'Giving',
+  'Church',
+  'Family Support',
+  'Shopping',
+  'Entertainment',
+  'Subscriptions',
+  'Education',
+  'Clothing',
+  'Haircuts',
+  'Travel',
+  'Emergency',
+  'Debt Payments',
+  'Savings',
+  'Investments',
+  'Miscellaneous',
+] as const;

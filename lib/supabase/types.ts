@@ -8,6 +8,9 @@ import type {
   NotificationTemplate,
   ParcelEventType,
   ParcelSize,
+  PersonalAccountType,
+  PersonalCategoryKind,
+  PersonalTransactionType,
   Role,
   VehicleStatus,
   VehicleType,
@@ -206,6 +209,86 @@ export interface Database {
           template: NotificationTemplate;
         };
         Update: Partial<Database['public']['Tables']['notification_log']['Row']>;
+        Relationships: NoRelationships;
+      };
+      personal_accounts: {
+        Row: {
+          id: string;
+          owner_id: string;
+          name: string;
+          account_type: PersonalAccountType;
+          institution: string | null;
+          opening_balance: number;
+          is_active: boolean;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: Partial<Database['public']['Tables']['personal_accounts']['Row']> & {
+          owner_id: string;
+          name: string;
+          account_type: PersonalAccountType;
+        };
+        Update: Partial<Database['public']['Tables']['personal_accounts']['Row']>;
+        Relationships: NoRelationships;
+      };
+      personal_categories: {
+        Row: {
+          id: string;
+          owner_id: string;
+          name: string;
+          kind: PersonalCategoryKind;
+          monthly_budget: number;
+          sort_order: number;
+          created_at: string;
+          updated_at: string;
+        };
+        Insert: Partial<Database['public']['Tables']['personal_categories']['Row']> & {
+          owner_id: string;
+          name: string;
+          kind: PersonalCategoryKind;
+        };
+        Update: Partial<Database['public']['Tables']['personal_categories']['Row']>;
+        Relationships: NoRelationships;
+      };
+      personal_transactions: {
+        Row: {
+          id: string;
+          owner_id: string;
+          account_id: string;
+          category_id: string | null;
+          type: PersonalTransactionType;
+          amount: number;
+          description: string | null;
+          occurred_at: string;
+          created_at: string;
+        };
+        Insert: Partial<Database['public']['Tables']['personal_transactions']['Row']> & {
+          owner_id: string;
+          account_id: string;
+          type: PersonalTransactionType;
+          amount: number;
+        };
+        Update: Partial<Database['public']['Tables']['personal_transactions']['Row']>;
+        Relationships: NoRelationships;
+      };
+      personal_salary_transfers: {
+        Row: {
+          id: string;
+          owner_id: string;
+          account_id: string;
+          transaction_id: string;
+          amount: number;
+          note: string | null;
+          transferred_at: string;
+          created_at: string;
+        };
+        Insert: Partial<Database['public']['Tables']['personal_salary_transfers']['Row']> & {
+          owner_id: string;
+          account_id: string;
+          transaction_id: string;
+          amount: number;
+        };
+        Update: Partial<Database['public']['Tables']['personal_salary_transfers']['Row']>;
         Relationships: NoRelationships;
       };
     };

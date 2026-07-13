@@ -1,6 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { signOut } from '@/lib/auth/sign-out-action';
+import { createClient } from '@/lib/supabase/server';
 
 const NAV = [
   { href: '/admin/dashboard', label: 'Dashboard' },
@@ -9,7 +10,20 @@ const NAV = [
   { href: '/admin/riders', label: 'Riders' },
 ];
 
-export default function AdminLayout({ children }: { children: React.ReactNode }) {
+export default async function AdminLayout({ children }: { children: React.ReactNode }) {
+  const supabase = await createClient();
+  const {
+    data: { user },
+  } = await supabase.auth.getUser();
+  const { data: profile } = user
+    ? await supabase.from('profiles').select('role').eq('id', user.id).maybeSingle()
+    : { data: null };
+
+  // Personal finance is the owner's own money, not a business operations
+  // surface — only shown (and only reachable, per proxy.ts) for role='admin',
+  // not 'dispatcher'.
+  const nav = profile?.role === 'admin' ? [...NAV, { href: '/admin/personal', label: 'Personal Finance' }] : NAV;
+
   return (
     <div className="flex min-h-screen">
       <aside className="w-56 shrink-0 border-r p-4">
@@ -18,7 +32,7 @@ export default function AdminLayout({ children }: { children: React.ReactNode })
           <span className="font-semibold text-brand-navy">WACOSE Admin</span>
         </div>
         <nav className="space-y-1">
-          {NAV.map((item) => (
+          {nav.map((item) => (
             <Link
               key={item.href}
               href={item.href}

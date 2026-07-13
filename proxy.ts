@@ -50,6 +50,11 @@ export async function proxy(request: NextRequest) {
     if (isRiderRoute && role !== 'rider') {
       return NextResponse.redirect(new URL('/', request.url));
     }
+    // Personal finance is the owner's own money, not a business operations
+    // surface — gated tighter than the rest of /admin, which dispatcher can use.
+    if (pathname.startsWith('/admin/personal') && role !== 'admin') {
+      return NextResponse.redirect(new URL('/admin/dashboard', request.url));
+    }
   }
 
   return response;
